@@ -5,7 +5,10 @@ export default function Home() {
   const [input, setInput] = useState('');
 
   const addItem = () => {
-    if (input.trim() === '') return;
+    if (input.trim() === '') {
+      alert("Bitte geben Sie einen Artikel ein.");
+      return;
+    }
     setItems([...items, { id: Date.now(), name: input, bought: false }]);
     setInput('');
   };
@@ -24,17 +27,17 @@ export default function Home() {
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg">
-      <h1 className="text-xl font-bold mb-4">Grocery List</h1>
+      <h1 className="text-xl font-bold mb-4">Einkaufsliste</h1>
       <div className="flex gap-2 mb-4">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Add an item..."
+          placeholder="Artikel hinzufügen..."
           className="border p-2 flex-grow rounded"
         />
         <button onClick={addItem} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Add
+          Hinzufügen
         </button>
       </div>
       <ul>
@@ -47,7 +50,7 @@ export default function Home() {
               {item.name}
             </span>
             <button onClick={() => deleteItem(item.id)} className="text-red-500">
-              X
+              Löschen
             </button>
           </li>
         ))}
